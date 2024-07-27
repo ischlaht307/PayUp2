@@ -10,7 +10,7 @@ function PU_Database() {
 			db.ExecuteSql("CREATE TABLE IF NOT EXISTS User_Accounts" +
 				"("+User_Accounts_TableColums+")", [],
 				function (data) {
-					/*OnSuccDebug("Came From Init::: CREATE TABLE;;; User_Accounts... ", data)*/
+					OnSuccDebug("Came From Init::: CREATE TABLE;;; User_Accounts... ", data)//check and remove after debug
 				}, OnErr);
 		} catch (err) { app.Error("Database Table \"User_Accounts\"  could not be created with Error: " + err + "...", 10, "App.DB.System.js", true) }
 	} catch (err) { app.Error("Database Failed to open with Error: " + err + "...", 12, "App.DB.System.js", true) }
@@ -64,7 +64,8 @@ function PU_Database() {
 	function FinishUserCreate(existing_Accounts, UserName, Password, Name) {
 		if (existing_Accounts == 0) {
 		  let passHash = GetHash(Password);
-			try {    db.ExecuteSql("INSERT INTO User_Accounts (Username, Name, Password) VALUES(?,?,?)", [UserName, Name, passHash], OnUserInserted, OnErr)}
+		  let creation_date = Date.now();//check====+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+			try {    db.ExecuteSql("INSERT INTO User_Accounts (Username, Name, Password,CreationDate) VALUES(?,?,?)", [UserName, Name, passHash,creation_date], OnUserInserted, OnErr)}//check Creation date++++++
 			  catch (err) {   app.Error("Failed to insert user with ERROR : " + err + "...", 53, "App.DB.System.js", true);   }
 		}
 		else {
@@ -73,7 +74,7 @@ function PU_Database() {
 		//On Seccessful User Insert–---------------------------------------------------------
 		//On Seccessful User Insert–---------------------------------------------------------
 		function OnUserInserted( data ) {
-			let creation_date = Date();
+			;
 			//app.SaveJson({userID: data.insertId, creationDate: creation_date}, "App.Data.json");
 			app.Alert("Success full insertion Data : " + data.insertId + "...");
 		}
