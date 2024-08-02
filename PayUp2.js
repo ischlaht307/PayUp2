@@ -13,6 +13,8 @@ var LOGGEDIN;
 //——————————————————————————————————————————
 //——————————————————————————————————————————
 function OnStart() {
+var dir = app.GetDatabaseFolder();
+app.Alert( dir )
 	var State = new AppState();
 
 	main_lay = app.CreateLayout("Linear", "VTop, FillXY");

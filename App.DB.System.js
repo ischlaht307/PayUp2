@@ -65,7 +65,7 @@ function PU_Database() {
 		if (existing_Accounts == 0) {
 		  let passHash = GetHash(Password);
 		  let creation_date = Date.now();//check====+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-			try {    db.ExecuteSql("INSERT INTO User_Accounts (Username, Name, Password,CreationDate) VALUES(?,?,?)", [UserName, Name, passHash,creation_date], OnUserInserted, OnErr)}//check Creation date++++++
+			try {    db.ExecuteSql("INSERT INTO User_Accounts (Username, Name, Password,CreationDate) VALUES(?,?,?,?)", [UserName, Name, passHash,creation_date], OnUserInserted, OnErr)}//check Creation date++++++
 			  catch (err) {   app.Error("Failed to insert user with ERROR : " + err + "...", 53, "App.DB.System.js", true);   }
 		}
 		else {
